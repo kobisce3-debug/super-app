@@ -9,10 +9,8 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
 
-        env:
-      DOCKERHUB_USERNAME: ${{ secrets.DOCKERHUB_USERNAME }}
-    
-    steps:
+  env:
+    DOCKERHUB_USERNAME: ${{ secrets.DOCKERHUB_USERNAME }}    steps:
     - name: Checkout code
       uses: actions/checkout@v3
     
