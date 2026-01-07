@@ -22,9 +22,7 @@ services:
 
   # Node.js Application
   node-app:
-    build:
-      context: ./node
-      dockerfile: Dockerfile
+    image: kobisce/super-app-node:latest
     container_name: super-app-node
     ports:
       - "3000:3000"
@@ -42,9 +40,7 @@ services:
 
   # PHP Application
   php-app:
-    build:
-      context: ./php
-      dockerfile: Dockerfile
+    image: kobisce/super-app-php:latest
     container_name: super-app-php
     ports:
       - "80:80"
