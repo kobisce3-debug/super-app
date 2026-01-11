@@ -44,6 +44,13 @@ jobs:
         docker --version
         EOF
 
+        # Install Docker Compose
+        ssh -i ~/.ssh/id_rsa -o StrictHostKeyChecking=no $VM_USER@$VM_HOST 'bash -s' << 'COMPOSE'
+        sudo curl -L "https://github.com/docker/compose/releases/download/v2.24.0/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+        sudo chmod +x /usr/local/bin/docker-compose
+        docker-compose --version
+        COMPOSE
+
         # Copy docker-compose.yml to VM
         scp -i ~/.ssh/id_rsa -o StrictHostKeyChecking=no docker-compose.yml $VM_USER@$VM_HOST:~/
 
