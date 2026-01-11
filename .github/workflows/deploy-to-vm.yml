@@ -43,3 +43,21 @@ jobs:
         echo "Docker installed successfully!"
         docker --version
         EOF
+
+        # Copy docker-compose.yml to VM
+        scp -i ~/.ssh/id_rsa -o StrictHostKeyChecking=no docker-compose.yml $VM_USER@$VM_HOST:~/
+
+        # Deploy containers
+        ssh -i ~/.ssh/id_rsa -o StrictHostKeyChecking=no $VM_USER@$VM_HOST 'bash -s' << 'DEPLOY'
+        # Stop and remove existing containers
+        docker-compose down 2>/dev/null || true
+        
+        # Pull latest images
+        docker-compose pull
+        
+        # Start containers in detached mode
+        docker-compose up -d
+        
+        # Show running containers
+        docker ps
+        DEPLOY
